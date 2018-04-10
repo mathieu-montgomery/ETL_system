@@ -1,0 +1,25 @@
+TRUNCATE TABLE TaMember_Yesterday;
+
+Insert into TaMember_Yesterday (MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, DATEJOINED, DATELEFT, OWNSPLANEREG, STATUSSTUDENT, 
+                              STATUSPILOT, STATUSASCAT, STATUSFULLCAT, SEX, CLUB )
+  select 
+       MEMBERNO
+    ,  INITIALS
+    ,  NAME
+    ,  ADDRESS
+    ,  ZIPCODE
+    ,  DATEBORN
+    ,  DATEJOINED
+    ,  DATELEFT
+    ,  OWNSPLANEREG
+    ,  STATUSSTUDENT
+    ,  STATUSPILOT
+    ,  STATUSASCAT
+    ,  STATUSFULLCAT
+    ,  SEX
+    ,  CLUB
+  
+  from taMember;
+
+  
+  

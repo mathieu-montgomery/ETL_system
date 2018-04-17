@@ -1,3 +1,13 @@
+drop table F_Flights;
+drop table D_Time;
+drop table D_Plane;
+drop table BridgePilotFlights;
+drop table D_MEMBER;
+drop table D_LaunchType;
+drop table D_Club;
+
+
+
 CREATE TABLE D_Club (
     club_ID VARCHAR(50) NOT NULL,
 
@@ -31,7 +41,7 @@ CREATE TABLE D_MEMBER(
 	OwnsGlider NUMBER(1),
     VALID_FROM DATE,
     VALID_TO Date,
-	Constraint PK_D_Member PRIMARY KEY(JUNK_ID)
+	Constraint PK_D_Member PRIMARY KEY(member_change_ID)
 );
 
 CREATE TABLE BridgePilotFlights(

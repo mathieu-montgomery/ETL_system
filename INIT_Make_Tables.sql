@@ -21,7 +21,7 @@ CREATE TABLE D_MEMBER(
 	MEMBER_ID INT not null, 
 	INITIALS VARCHAR(4),
 	Birthday DATE not null,
-	Age INT,
+	Age number(3,0),
 	PilotGender NUMBER(1),
 	Name VARCHAR(50),
 	Adress VARCHAR2(50),
@@ -29,7 +29,8 @@ CREATE TABLE D_MEMBER(
 	StartDate DATE,
 	EndDate DATE,
 	OwnsGlider NUMBER(1),
-
+    VALID_FROM DATE,
+    VALID_TO Date,
 	Constraint PK_D_Member PRIMARY KEY(JUNK_ID)
 );
 

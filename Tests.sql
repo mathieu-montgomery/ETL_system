@@ -1,5 +1,6 @@
 truncate table tamember_yesterday;
 truncate table tamember_changes; 
+truncate table tamember_error;
 truncate table D_Member;
 
 select * from tamember_changes;

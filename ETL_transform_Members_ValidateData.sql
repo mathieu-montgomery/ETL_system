@@ -22,43 +22,32 @@ select OPERATION
     ,  SEX
     ,  CLUB
     ,  case STATUSSTUDENT || STATUSPILOT || STATUSASCAT || STATUSFULLCAT 
-        when 'YNNN' then 'STATUSSTUDENT' 
-        when 'NYNN' then 'STATUSPILOT'    
-        when 'NNYN' then 'STATUSASCAT'
-        when 'NNNY' then 'STATUSFULLCAT'
+        when 'YNNN' then 'Student' 
+        when 'NYNN' then 'Pilot'    
+        when 'NNYN' then 'Assistant category pilot'
+        when 'NNNY' then 'Full category pilot'
       end as STATUS
   
   from TaMember_Changes
   where regexp_count(STATUSSTUDENT || STATUSPILOT || STATUSASCAT || STATUSFULLCAT, 'Y')=1; 
   
 -- Select the people that have more than one status : errors
-insert into TaMember_Error_Status (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, DATEJOINED, DATELEFT, OWNSPLANEREG, STATUSSTUDENT, 
-                              STATUSPILOT, STATUSASCAT, STATUSFULLCAT, SEX, CLUB, typeError )
+insert into TaMember_Error ( idError, Operation, MemberNo, dateError, step, dataError, typeError, status)
 
-select OPERATION 
+select 
+       seq_TRANSFORM_ERROR_ID.nextval as idError 
+    ,  OPERATION
     ,  MEMBERNO
-    ,  INITIALS
-    ,  NAME
-    ,  ADDRESS
-    ,  ZIPCODE
-    ,  DATEBORN
-    ,  DATEJOINED
-    ,  DATELEFT
-    ,  OWNSPLANEREG
-    ,  STATUSSTUDENT
-    ,  STATUSPILOT
-    ,  STATUSASCAT
-    ,  STATUSFULLCAT
-    ,  SEX
-    ,  CLUB
+    ,  sysdate as dateError
+    , 'Validate Status' as step
+    , (STATUSSTUDENT || STATUSPILOT || STATUSASCAT || STATUSFULLCAT) as dataError
     ,  case
           when  regexp_count(STATUSSTUDENT || STATUSPILOT || STATUSASCAT || STATUSFULLCAT, 'Y')>1 then 'To much status'
           when  regexp_count(STATUSSTUDENT || STATUSPILOT || STATUSASCAT || STATUSFULLCAT, 'Y')=0 then 'No status'
        end as typeError
+    , 'Not fixed' as status
   from TaMember_Changes
   where regexp_count(STATUSSTUDENT || STATUSPILOT || STATUSASCAT || STATUSFULLCAT, 'Y')>1 OR regexp_count(STATUSSTUDENT || STATUSPILOT || STATUSASCAT || STATUSFULLCAT, 'Y')=0; 
-  
-  
   
   
   -- Set the age to people
@@ -85,27 +74,21 @@ select OPERATION
   from TaMember_Validate_Status;
   
 -- Select the lines that have a error in the age
-insert into TaMember_Error_age (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, AGE, DATEJOINED, DATELEFT, OWNSPLANEREG,  
-                            SEX, CLUB, STATUS, typeError)
+insert into TaMember_Error ( idError, Operation, MemberNo, dateError, step, dataError, typeError, status)
 
-select OPERATION 
+select 
+       seq_TRANSFORM_ERROR_ID.nextval as idError
+    ,  OPERATION 
     ,  MEMBERNO
-    ,  INITIALS
-    ,  NAME
-    ,  ADDRESS
-    ,  ZIPCODE
-    ,  DATEBORN
-    ,  AGE
-    ,  DATEJOINED
-    ,  DATELEFT
-    ,  OWNSPLANEREG
-    ,  SEX
-    ,  CLUB
-    ,  STATUS
-    , CASE 
+    ,  sysdate as dateError
+    ,  'Validate age' as step
+    ,  ('AGE : ' || AGE) as dataError
+    ,  CASE 
         when AGE > 130 then 'Age to high' 
-        when Age < 5 then 'Age to low'
+        when AGE < 5 then 'Age to low'
       end as typeError
+    , 'Not fixed' as status
+    
   from TaMember_Validate_TEST_age where AGE >130 OR AGE < 5;  
 
 
@@ -129,9 +112,6 @@ select OPERATION
     ,  STATUS
 
   from TaMember_Validate_TEST_age
-  where AGE < 130 AND AGE > 5;
-
-            
-  
+  where AGE < 130 AND AGE > 5;  
 
 

@@ -27,20 +27,21 @@ CREATE TABLE D_LaunchType(
 
 CREATE TABLE D_MEMBER(
 	member_change_ID INT not null,
-
 	MEMBER_ID INT not null, 
-	INITIALS VARCHAR(4),
-	Birthday DATE not null,
-	Age number(3,0),
-	PilotGender NUMBER(1),
-	Name VARCHAR(50),
+	INITIALS CHAR(4),
+	Name VARCHAR2(50),
 	Adress VARCHAR2(50),
-	Status VARCHAR(50),
-	StartDate DATE,
-	EndDate DATE,
-	OwnsGlider NUMBER(1),
-    VALID_FROM DATE,
-    VALID_TO Date,
+  ZipCode number(4,0) not null,
+	DATEBORN DATE not null,
+	AGE number(3,0),
+	DATEJOINED DATE,
+	DATELEFT DATE,
+  OWNSPLANEREG CHAR(3 BYTE),
+  SEX	CHAR(1 BYTE),
+  CLUB_ID VARCHAR(50) not null,
+	STATUS VARCHAR(50),
+  VALID_FROM DATE,
+  VALID_TO Date,
 	Constraint PK_D_Member PRIMARY KEY(member_change_ID)
 );
 

@@ -24,7 +24,7 @@ create table TaFlights
 	
 	);
 	
-create table TaFlightsNew
+create table TaFlights_New
 	(	
 	 LAUNCHTIME 		date not null
 	,LANDINGTIME 		date 
@@ -45,7 +45,7 @@ create table TaFlightsNew
 	
 	);
 	
-create table TaFlightsYesterday
+create table TaFlights_Yesterday
 	(	
 	 LAUNCHTIME 		date not null
 	,LANDINGTIME 		date 

@@ -28,9 +28,9 @@ create table TaFlightsNew
 	(	
 	 LAUNCHTIME 		date not null
 	,LANDINGTIME 		date 
-	,PLANEREGISTRATION 	char(03) not null;
-	,PILOT1INIT 		char(04) not null;
-	,PILOT2INIT 		char(01)
+	,PLANEREGISTRATION 	char(03) not null
+	,PILOT1INIT 		char(04) not null
+	,PILOT2INIT 		char(04)
 	,LAUNCHAEROTOW 		char(01)
 						constraint coCHLaunchAerotow check (LaunchAerotow in ('Y' , 'N'))
 	,LAUNCHWINCH 		char(01)
@@ -49,9 +49,9 @@ create table TaFlightsYesterday
 	(	
 	 LAUNCHTIME 		date not null
 	,LANDINGTIME 		date 
-	,PLANEREGISTRATION 	char(03) not null;
-	,PILOT1INIT 		char(04) not null;
-	,PILOT2INIT 		char(01)
+	,PLANEREGISTRATION 	char(03) not null
+	,PILOT1INIT 		char(04) not null
+	,PILOT2INIT 		char(04)
 	,LAUNCHAEROTOW 		char(01)
 						constraint coCHLaunchAerotow check (LaunchAerotow in ('Y' , 'N'))
 	,LAUNCHWINCH 		char(01)

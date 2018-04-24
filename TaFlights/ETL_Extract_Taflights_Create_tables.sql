@@ -11,13 +11,13 @@ create table TaFlights
 	,PILOT1INIT 		char(04) not null;
 	,PILOT2INIT 		char(01)
 	,LAUNCHAEROTOW 		char(01)
-						constraint coCHLaunchAerotow check (LaunchAerotow in ('Y' , 'N'))
+						
 	,LAUNCHWINCH 		char(01)
-						constraint coCHLaunchWinch  check (LaunchWinch in ('Y' , 'N'))
+				
 	,LAUNCHSELFLAUNCH 	char(01)
-						constraint coCHLaunchSelfLaunch check (LaunchSelfLaunch in ('Y' , 'N'))
+						
 	,CABLEBREAK 		char(01)
-						constraint coCHCableBreak check (CableBreak in ('Y' , 'N'))
+						
 	,CROSSCOUNTRYKM 	number(04)
 						default 0  
 	, CLUB				varchar(50) not null
@@ -32,13 +32,13 @@ create table TaFlightsNew
 	,PILOT1INIT 		char(04) not null
 	,PILOT2INIT 		char(04)
 	,LAUNCHAEROTOW 		char(01)
-						constraint coCHLaunchAerotow check (LaunchAerotow in ('Y' , 'N'))
+				
 	,LAUNCHWINCH 		char(01)
-						constraint coCHLaunchWinch  check (LaunchWinch in ('Y' , 'N'))
+					
 	,LAUNCHSELFLAUNCH 	char(01)
-						constraint coCHLaunchSelfLaunch check (LaunchSelfLaunch in ('Y' , 'N'))
+					
 	,CABLEBREAK 		char(01)
-						constraint coCHCableBreak check (CableBreak in ('Y' , 'N'))
+						
 	,CROSSCOUNTRYKM 	number(04)
 						default 0  
 	, CLUB				varchar(50) not null
@@ -53,13 +53,13 @@ create table TaFlightsYesterday
 	,PILOT1INIT 		char(04) not null
 	,PILOT2INIT 		char(04)
 	,LAUNCHAEROTOW 		char(01)
-						constraint coCHLaunchAerotow check (LaunchAerotow in ('Y' , 'N'))
+				
 	,LAUNCHWINCH 		char(01)
-						constraint coCHLaunchWinch  check (LaunchWinch in ('Y' , 'N'))
+						
 	,LAUNCHSELFLAUNCH 	char(01)
-						constraint coCHLaunchSelfLaunch check (LaunchSelfLaunch in ('Y' , 'N'))
+				
 	,CABLEBREAK 		char(01)
-						constraint coCHCableBreak check (CableBreak in ('Y' , 'N'))
+					
 	,CROSSCOUNTRYKM 	number(04)
 						default 0  
 	, CLUB				varchar(50) not null

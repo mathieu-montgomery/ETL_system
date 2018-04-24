@@ -1,6 +1,6 @@
 drop table TaFlights;
-drop table TaFlightsNew;
-drop table TaFlightsYesterday;
+drop table TaFlights_New;
+drop table TaFlights_Yesterday;
 
 
 create table TaFlights

@@ -66,6 +66,10 @@ WHERE memberno=250;
 UPDATE tamember
 SET Dateborn = '01/05/2020'
 WHERE memberno=251;
+
+show create table taflightssg70;
+
+select * from taflightssg70;
   
   
 truncate table TaMember_Validate_Status;

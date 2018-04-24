@@ -4,7 +4,7 @@ select case column_id
   end
   from dba_tab_cols
   where owner='DWH'
-  and table_name = 'D_MEMBER';
+  and table_name = 'TAFLIGHTSSG70';
   
 
 select sysdate from dual;

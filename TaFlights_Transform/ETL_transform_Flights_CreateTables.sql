@@ -57,7 +57,6 @@ create table TaFlight_Validate_Duration
 (
           idError           int primary key not null
         , launchtime        date not null
-        , flight_duration   int
         , club              varchar(50) not null
         , dateError         date
         , step              varchar2(100)

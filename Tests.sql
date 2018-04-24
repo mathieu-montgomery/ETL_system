@@ -84,3 +84,5 @@ select * from TaMember_Error_AGE;
 select * from TAMEMBER_VALIDATE_AGE;
 
 select * from d_member where MEMBER_ID=9990;
+
+select * from taflights where regexp_count(LAUNCHAEROTOW || LAUNCHWINCH || LAUNCHSELFLAUNCH, 'Y')=0;

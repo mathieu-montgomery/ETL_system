@@ -1,9 +1,9 @@
-truncate table TaFlights_Validate_Duration;
+truncate table TaFlight_Validate_Duration;
 truncate table TaFlight_Validate_Pilot_Initials;
-truncate table TaFlights_Validate_Launch_Type;
+truncate table TaFlight_Validate_Launch_Type;
 
 -- Validate the duration
-insert into TaFlights_Validate_Duration  (LAUNCHTIME,  PLANEREGISTRATION,  PILOT1INIT,  PILOT2INIT
+insert into TaFlight_Validate_Duration  (LAUNCHTIME,  PLANEREGISTRATION,  PILOT1INIT,  PILOT2INIT
                                           ,LAUNCHAEROTOW,  LAUNCHWINCH,  LAUNCHSELFLAUNCH,  CABLEBREAK,  CROSSCOUNTRYKM,  CLUB, FLIGHT_DURATION)
 
   select LAUNCHTIME

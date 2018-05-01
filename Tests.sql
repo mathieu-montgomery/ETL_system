@@ -67,9 +67,17 @@ UPDATE tamember
 SET Dateborn = '01/05/2020'
 WHERE memberno=251;
 
-show create table taflightssg70;
-
 select * from taflightssg70;
+
+
+select i.pilot1Init
+      , coalesce(p.id, -1)
+from tempflight i
+left outer join d_plane p on 
+  (p.registration = i.planeRegistration 
+  and p.validTo = to_date('9999-12-31 00:00:00', 'YYYY-MM-DD, HH24..')
+  );
+-- make a -1 row on plane so if p.registration = null, then take this row
   
   
 truncate table TaMember_Validate_Status;

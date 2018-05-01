@@ -45,6 +45,7 @@ CREATE TABLE D_MEMBER(
 	Constraint PK_D_Member PRIMARY KEY(member_change_ID)
 );
 
+/*
 CREATE TABLE BridgePilotFlights(
 	flight_group_ID INT NOT NULL,
 	member_change_ID INT NOT NULL,
@@ -54,6 +55,15 @@ CREATE TABLE BridgePilotFlights(
     
     CONSTRAINT FK_D_MEMBER FOREIGN KEY(member_change_ID) REFERENCES D_MEMBER(member_change_ID),
     CONSTRAINT FK_D_MEMBER2 FOREIGN KEY(member_change2_ID) REFERENCES D_MEMBER(member_change_ID)
+);*/
+
+CREATE TABLE BridgePilotFlights(
+	flight_group_ID INT NOT NULL,
+	member_ID INT NOT NULL,
+	weight DECIMAL(3,2) NOT NULL,
+
+  CONSTRAINT PK_BridgePilotFlights PRIMARY KEY (flight_group_ID),
+  CONSTRAINT FK_D_MEMBER FOREIGN KEY(member_ID) REFERENCES D_MEMBER(member_change_ID)
 );
 
 CREATE TABLE D_Plane (
@@ -73,15 +83,15 @@ CREATE TABLE D_Plane (
     CONSTRAINT FK_OwnerClubName FOREIGN KEY(OwnerClubName) REFERENCES D_Club(club_ID)
 );
     
-
 CREATE TABLE D_Time (
-    Time_ID TIMESTAMP,
-    HourOfDay INT,
-    DayOfWeek VARCHAR(20),
-    Week INT,
-    FlightYear INT,
-   
-    CONSTRAINT PK_D_Time PRIMARY KEY (Time_ID)
+    ID_Time INT,
+    Year_time INT,
+    Month_time INT,
+    Day_time INT,
+    Hour_time INT,
+    Minute_time INT,
+
+    CONSTRAINT PK_D_Time PRIMARY KEY (ID_Time)
 );
 
 
@@ -91,7 +101,7 @@ CREATE TABLE F_Flights (
     plane_ID VARCHAR(20),
     flight_group_ID INT,
     club_ID VARCHAR(50),
-    time_ID TIMESTAMP, 
+    time_ID int, 
     launch_type_ID NUMBER(1),
 
     incident NUMBER(1),
@@ -102,7 +112,7 @@ CREATE TABLE F_Flights (
     
     CONSTRAINT FK_Launch_type FOREIGN KEY(launch_type_ID) REFERENCES D_LaunchType(launch_type_ID),
     CONSTRAINT FK_Club FOREIGN KEY(club_ID) REFERENCES D_Club(club_ID),
-    CONSTRAINT FK_Time FOREIGN KEY(time_ID) REFERENCES D_Time(Time_ID),
+    CONSTRAINT FK_Time FOREIGN KEY(time_ID) REFERENCES D_Time(ID_Time),
 	CONSTRAINT FK_Plane FOREIGN KEY(plane_ID) REFERENCES D_Plane(RegistrationNumber_ID),
     CONSTRAINT FK_BridgeFlight FOREIGN KEY(flight_group_ID) REFERENCES BridgePilotFlights(flight_group_ID),
 

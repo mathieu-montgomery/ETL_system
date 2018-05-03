@@ -49,7 +49,6 @@ select
   from TaMember_Changes
   where regexp_count(STATUSSTUDENT || STATUSPILOT || STATUSASCAT || STATUSFULLCAT, 'Y')>1 OR regexp_count(STATUSSTUDENT || STATUSPILOT || STATUSASCAT || STATUSFULLCAT, 'Y')=0; 
   
-  
   -- Set the age to people
 insert into TaMember_Validate_TEST_age (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, AGE, DATEJOINED, DATELEFT, OWNSPLANEREG,  
                             SEX, CLUB, STATUS)

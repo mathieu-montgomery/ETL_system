@@ -3,26 +3,19 @@ drop table D_Time;
 drop table D_Plane;
 drop table BridgePilotFlights;
 drop table D_MEMBER;
-drop table D_LaunchType;
 drop table D_Club;
 
 
 
 CREATE TABLE D_Club (
-    club_ID VARCHAR(50) NOT NULL,
+    Club_Change_ID INT not null,
+    Club_ID VARCHAR(50) NOT NULL,    
+    NameClub VARCHAR(50),
+    Adress VARCHAR(50),
+    Zipcode CHAR(04),
+    Region VARCHAR(50),
 
-    adress VARCHAR(50),
-    zipcode CHAR(04),
-    region VARCHAR(50),
-
-    CONSTRAINT PK_D_Club PRIMARY KEY (club_ID)
-);
-
-CREATE TABLE D_LaunchType(
-	launch_type_ID NUMBER(1),
-	name VARCHAR(50),
-
-    CONSTRAINT PK_D_LaunchType PRIMARY KEY (launch_type_ID)
+    CONSTRAINT PK_D_Club PRIMARY KEY (Club_Change_ID)
 );
 
 CREATE TABLE D_MEMBER(
@@ -67,20 +60,21 @@ CREATE TABLE BridgePilotFlights(
 );
 
 CREATE TABLE D_Plane (
+    Plane_Change_ID INT not null,
     RegistrationNumber_ID VARCHAR(20),
-
+    NamePlane VARCHAR(20),
     DateOfPurchase DATE,
     CompNo VARCHAR(20),
     PlaneType VARCHAR(20),
     ClubOwned NUMBER(1),
-    OwnerName VARCHAR(20),
+    Owner_ID INT,
     OwnerClubName VARCHAR(50),
     HasEngine NUMBER(1),
     NumberOfSeats INT,
 
-    CONSTRAINT PK_D_Plane PRIMARY KEY (RegistrationNumber_ID),
+    CONSTRAINT PK_D_Plane PRIMARY KEY (Plane_Change_ID),
     
-    CONSTRAINT FK_OwnerClubName FOREIGN KEY(OwnerClubName) REFERENCES D_Club(club_ID)
+    CONSTRAINT FK_OwnerClubName FOREIGN KEY(Owner_ID) REFERENCES D_Club(Club_Change_ID)
 );
     
 CREATE TABLE D_Time (
@@ -96,13 +90,14 @@ CREATE TABLE D_Time (
 
 
 CREATE TABLE F_Flights (
+    Flight_Change_ID INT NOT NULL,
     flight_ID INT NOT NULL,
 
-    plane_ID VARCHAR(20),
+    plane_ID INT,
     flight_group_ID INT,
-    club_ID VARCHAR(50),
-    time_ID int, 
-    launch_type_ID NUMBER(1),
+    club_ID INT,
+    time_ID INT, 
+    launch_type_ID VARCHAR(50),
 
     incident NUMBER(1),
     distance VARCHAR(255),
@@ -110,11 +105,10 @@ CREATE TABLE F_Flights (
     normal_season NUMBER(1),
 
     
-    CONSTRAINT FK_Launch_type FOREIGN KEY(launch_type_ID) REFERENCES D_LaunchType(launch_type_ID),
-    CONSTRAINT FK_Club FOREIGN KEY(club_ID) REFERENCES D_Club(club_ID),
+    CONSTRAINT FK_Club FOREIGN KEY(club_ID) REFERENCES D_Club(Club_Change_ID),
     CONSTRAINT FK_Time FOREIGN KEY(time_ID) REFERENCES D_Time(ID_Time),
-	CONSTRAINT FK_Plane FOREIGN KEY(plane_ID) REFERENCES D_Plane(RegistrationNumber_ID),
+    CONSTRAINT FK_Plane FOREIGN KEY(plane_ID) REFERENCES D_Plane(Plane_Change_ID),
     CONSTRAINT FK_BridgeFlight FOREIGN KEY(flight_group_ID) REFERENCES BridgePilotFlights(flight_group_ID),
 
-    CONSTRAINT PK_F_flights PRIMARY KEY (flight_ID)
+    CONSTRAINT PK_F_flights PRIMARY KEY (Flight_Change_ID)
 );

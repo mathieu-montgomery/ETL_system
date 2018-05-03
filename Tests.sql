@@ -71,14 +71,33 @@ select * from taflightssg70;
 
 
 select i.pilot1Init
+      , i.pilot2Init
       , coalesce(p.id, -1)
+      , i.duration
 from tempflight i
 left outer join d_plane p on 
   (p.registration = i.planeRegistration 
   and p.validTo = to_date('9999-12-31 00:00:00', 'YYYY-MM-DD, HH24..')
   );
 -- make a -1 row on plane so if p.registration = null, then take this row
+
+
+  declare
+  begin
+  for c in (select pilot1init, pilot2init, duration from tempFlight) loop
+    if c.pilot2Init='   ' then
+      dbms.output.put_line('single pilot flight');
+    end if;
+  end loop;
+  end;
+  -- See if on or more pilot
   
+  -- For the bridge table : use a sequence for group ID : incremente only for first row of every new group! 
+  -- Index the table datetime on day month year hour and min 
+  create index Jan on tableX (cd1, cd2, ..);
+    
+    
+    select * from tamember_changes;
   
 truncate table TaMember_Validate_Status;
 truncate table TaMember_Error_Status; 

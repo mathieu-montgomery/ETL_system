@@ -2,6 +2,11 @@ drop table TaFlight_Validate_Duration;
 drop table TaFlight_Validate_Pilot_Initials;
 drop table TaFlight_Validate_Launch_Type;
 drop table TaFlight_Error;
+drop table TaFlights_Key_Pilots_1;
+drop table TaFlights_Key_Pilots_2;
+drop table TaFlights_Key_Clubs;
+drop table TaFlights_Key_Time;
+drop table TaFlights_Key_Planes;
 
 
 
@@ -70,71 +75,71 @@ create table TaFlight_Validate_Duration
   
   create table TaFlights_Key_Pilots_1
 (
-        LAUNCHTIME
-      , FLIGHT_DURATION
-      , PLANEREGISTRATION
-      , PILOT1INIT
-      , PILOT2INIT
-      , LAUNCH_TYPE
-      , CABLEBREAK
-      , CROSSCOUNTRYKM
-      , CLUB
+      LAUNCHTIME         date not null
+  	, FLIGHT_DURATION    int
+  	, PLANEREGISTRATION  char(03) not null
+  	, PILOT1INIT         char(04) not null
+  	, PILOT2INIT         char(04)
+    , LAUNCH_TYPE        char(01)
+    , CABLEBREAK         char(01)		
+  	, CROSSCOUNTRYKM     number(04) default 0  
+  	, CLUB               varchar(50) not null
 );
 
 
   create table TaFlights_Key_Pilots_2
 (
-        LAUNCHTIME
-      , FLIGHT_DURATION
-      , PLANEREGISTRATION
-      , PILOT1INIT
-      , PILOT2INIT
-      , LAUNCH_TYPE
-      , CABLEBREAK
-      , CROSSCOUNTRYKM
-      , CLUB
+      LAUNCHTIME         date not null
+  	, FLIGHT_DURATION    int
+  	, PLANEREGISTRATION  char(03) not null
+  	, PILOT1INIT         char(04) not null
+  	, PILOT2INIT         char(04)
+    , LAUNCH_TYPE        char(01)
+    , CABLEBREAK         char(01)		
+  	, CROSSCOUNTRYKM     number(04) default 0  
+  	, CLUB               varchar(50) not null
 );
 
 
   create table TaFlights_Key_Clubs
 (
-        LAUNCHTIME
-      , FLIGHT_DURATION
-      , PLANEREGISTRATION
-      , PILOT1INIT
-      , PILOT2INIT
-      , LAUNCH_TYPE
-      , CABLEBREAK
-      , CROSSCOUNTRYKM
-      , CLUB
+      LAUNCHTIME         date not null
+  	, FLIGHT_DURATION    int
+  	, PLANEREGISTRATION  char(03) not null
+  	, PILOT1INIT         char(04) not null
+  	, PILOT2INIT         char(04)
+    , LAUNCH_TYPE        char(01)
+    , CABLEBREAK         char(01)		
+  	, CROSSCOUNTRYKM     number(04) default 0  
+  	, CLUB               varchar(50) not null
 );
 
 
   create table TaFlights_Key_Time
 (
-        LAUNCHTIME
-      , FLIGHT_DURATION
-      , PLANEREGISTRATION
-      , PILOT1INIT
-      , PILOT2INIT
-      , LAUNCH_TYPE
-      , CABLEBREAK
-      , CROSSCOUNTRYKM
-      , CLUB
+      LAUNCHTIME         date not null
+  	, FLIGHT_DURATION    int
+  	, PLANEREGISTRATION  char(03) not null
+  	, PILOT1INIT         char(04) not null
+  	, PILOT2INIT         char(04)
+    , LAUNCH_TYPE        char(01)
+    , CABLEBREAK         char(01)		
+  	, CROSSCOUNTRYKM     number(04) default 0  
+  	, CLUB               varchar(50) not null
 );
 
 
   create table TaFlights_Key_Planes
 (
-        LAUNCHTIME
-      , FLIGHT_DURATION
-      , PLANEREGISTRATION
-      , PILOT1INIT
-      , PILOT2INIT
-      , LAUNCH_TYPE
-      , CABLEBREAK
-      , CROSSCOUNTRYKM
-      , CLUB
+      LAUNCHTIME         date not null
+  	, FLIGHT_DURATION    int
+  	, PLANEREGISTRATION  char(03) not null
+  	, PILOT1INIT         char(04) not null
+  	, PILOT2INIT         char(04)
+    , LAUNCH_TYPE        char(01)
+    , CABLEBREAK         char(01)		
+  	, CROSSCOUNTRYKM     number(04) default 0  
+  	, CLUB               varchar(50) not null
 );
 
 

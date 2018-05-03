@@ -78,7 +78,7 @@ create table TaFlight_Validate_Duration
       LAUNCHTIME         date not null
   	, FLIGHT_DURATION    int
   	, PLANEREGISTRATION  char(03) not null
-  	, PILOT1INIT         char(04) not null
+  	, PILOT1INIT         int not null
   	, PILOT2INIT         char(04)
     , LAUNCH_TYPE        char(01)
     , CABLEBREAK         char(01)		
@@ -92,8 +92,8 @@ create table TaFlight_Validate_Duration
       LAUNCHTIME         date not null
   	, FLIGHT_DURATION    int
   	, PLANEREGISTRATION  char(03) not null
-  	, PILOT1INIT         char(04) not null
-  	, PILOT2INIT         char(04)
+  	, PILOT1INIT         int not null
+  	, PILOT2INIT         int
     , LAUNCH_TYPE        char(01)
     , CABLEBREAK         char(01)		
   	, CROSSCOUNTRYKM     number(04) default 0  
@@ -106,40 +106,40 @@ create table TaFlight_Validate_Duration
       LAUNCHTIME         date not null
   	, FLIGHT_DURATION    int
   	, PLANEREGISTRATION  char(03) not null
-  	, PILOT1INIT         char(04) not null
-  	, PILOT2INIT         char(04)
+  	, PILOT1INIT         int not null
+  	, PILOT2INIT         int
     , LAUNCH_TYPE        char(01)
     , CABLEBREAK         char(01)		
   	, CROSSCOUNTRYKM     number(04) default 0  
-  	, CLUB               varchar(50) not null
+  	, CLUB               int not null
 );
 
 
   create table TaFlights_Key_Time
 (
-      LAUNCHTIME         date not null
+      LAUNCHTIME         int not null
   	, FLIGHT_DURATION    int
   	, PLANEREGISTRATION  char(03) not null
-  	, PILOT1INIT         char(04) not null
-  	, PILOT2INIT         char(04)
+  	, PILOT1INIT         int not null
+  	, PILOT2INIT         int
     , LAUNCH_TYPE        char(01)
     , CABLEBREAK         char(01)		
   	, CROSSCOUNTRYKM     number(04) default 0  
-  	, CLUB               varchar(50) not null
+  	, CLUB               int not null
 );
 
 
   create table TaFlights_Key_Planes
 (
-      LAUNCHTIME         date not null
+      LAUNCHTIME         int not null
   	, FLIGHT_DURATION    int
-  	, PLANEREGISTRATION  char(03) not null
-  	, PILOT1INIT         char(04) not null
-  	, PILOT2INIT         char(04)
+  	, PLANEREGISTRATION  int not null
+  	, PILOT1INIT         int not null
+  	, PILOT2INIT         int
     , LAUNCH_TYPE        char(01)
     , CABLEBREAK         char(01)		
   	, CROSSCOUNTRYKM     number(04) default 0  
-  	, CLUB               varchar(50) not null
+  	, CLUB               int not null
 );
 
 

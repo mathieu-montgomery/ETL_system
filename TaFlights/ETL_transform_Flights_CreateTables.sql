@@ -65,3 +65,76 @@ create table TaFlight_Validate_Duration
         , status            varchar2(100)
 ); 
   
+  
+  
+  
+  create table TaFlights_Key_Pilots_1
+(
+        LAUNCHTIME
+      , FLIGHT_DURATION
+      , PLANEREGISTRATION
+      , PILOT1INIT
+      , PILOT2INIT
+      , LAUNCH_TYPE
+      , CABLEBREAK
+      , CROSSCOUNTRYKM
+      , CLUB
+);
+
+
+  create table TaFlights_Key_Pilots_2
+(
+        LAUNCHTIME
+      , FLIGHT_DURATION
+      , PLANEREGISTRATION
+      , PILOT1INIT
+      , PILOT2INIT
+      , LAUNCH_TYPE
+      , CABLEBREAK
+      , CROSSCOUNTRYKM
+      , CLUB
+);
+
+
+  create table TaFlights_Key_Clubs
+(
+        LAUNCHTIME
+      , FLIGHT_DURATION
+      , PLANEREGISTRATION
+      , PILOT1INIT
+      , PILOT2INIT
+      , LAUNCH_TYPE
+      , CABLEBREAK
+      , CROSSCOUNTRYKM
+      , CLUB
+);
+
+
+  create table TaFlights_Key_Time
+(
+        LAUNCHTIME
+      , FLIGHT_DURATION
+      , PLANEREGISTRATION
+      , PILOT1INIT
+      , PILOT2INIT
+      , LAUNCH_TYPE
+      , CABLEBREAK
+      , CROSSCOUNTRYKM
+      , CLUB
+);
+
+
+  create table TaFlights_Key_Planes
+(
+        LAUNCHTIME
+      , FLIGHT_DURATION
+      , PLANEREGISTRATION
+      , PILOT1INIT
+      , PILOT2INIT
+      , LAUNCH_TYPE
+      , CABLEBREAK
+      , CROSSCOUNTRYKM
+      , CLUB
+);
+
+

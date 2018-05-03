@@ -90,7 +90,6 @@ CREATE TABLE D_Time (
 
 
 CREATE TABLE F_Flights (
-    Flight_Change_ID INT NOT NULL,
     flight_ID INT NOT NULL,
 
     plane_ID INT,
@@ -102,7 +101,6 @@ CREATE TABLE F_Flights (
     incident NUMBER(1),
     distance VARCHAR(255),
     flight_duration VARCHAR(255),
-    normal_season NUMBER(1),
 
     
     CONSTRAINT FK_Club FOREIGN KEY(club_ID) REFERENCES D_Club(Club_Change_ID),
@@ -110,5 +108,5 @@ CREATE TABLE F_Flights (
     CONSTRAINT FK_Plane FOREIGN KEY(plane_ID) REFERENCES D_Plane(Plane_Change_ID),
     CONSTRAINT FK_BridgeFlight FOREIGN KEY(flight_group_ID) REFERENCES BridgePilotFlights(flight_group_ID),
 
-    CONSTRAINT PK_F_flights PRIMARY KEY (Flight_Change_ID)
+    CONSTRAINT PK_F_flights PRIMARY KEY (flight_ID)
 );

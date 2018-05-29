@@ -1,6 +1,8 @@
-TRUNCATE TABLE TaMember_Yesterday;
+-- This should be launch after one cycle of ETL of members. It will simply copy all data from TaMembers into TaMembers_Yesterday
 
-Insert into TaMember_Yesterday (MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, DATEJOINED, DATELEFT, OWNSPLANEREG, STATUSSTUDENT, 
+TRUNCATE TABLE TaMembers_Yesterday;
+
+Insert into TaMembers_Yesterday (MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, DATEJOINED, DATELEFT, OWNSPLANEREG, STATUSSTUDENT, 
                               STATUSPILOT, STATUSASCAT, STATUSFULLCAT, SEX, CLUB )
   select 
        MEMBERNO
@@ -19,7 +21,7 @@ Insert into TaMember_Yesterday (MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATE
     ,  SEX
     ,  CLUB
   
-  from taMember;
+  from taMembers;
 
   
   

@@ -1,3 +1,7 @@
+--This will compare the flights to get only the new one (so we don't add old flights)
+
+
+
 TRUNCATE TABLE TAFLIGHTS_New;
 
 Insert into TAFLIGHTS_New (LAUNCHTIME,  LANDINGTIME,  PLANEREGISTRATION,  PILOT1INIT,  PILOT2INIT,  LAUNCHAEROTOW,  LAUNCHWINCH,  LAUNCHSELFLAUNCH,  

@@ -1,12 +1,17 @@
-truncate table TaMember_Validate_Status;
-truncate table TaMember_Error_Status;
-truncate table TaMember_Validate_TEST_age;
-truncate table TaMember_Error_age;
-truncate table TaMember_Validate_age;
+--This will validate the data : the status of the member and the age. We first write the age in a table, and then test it.
+
+truncate table TaMembers_Validate_Status;
+truncate table TaMembers_Validate_TEST_age;
+truncate table TaMembers_Validate_age;
+
+
 
 
 -- Select the people that have only one status
-insert into TaMember_Validate_Status (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, DATEJOINED, DATELEFT, OWNSPLANEREG,  
+
+
+
+insert into TaMembers_Validate_Status (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, DATEJOINED, DATELEFT, OWNSPLANEREG,  
                             SEX, CLUB, STATUS)
 
 select OPERATION 
@@ -28,11 +33,19 @@ select OPERATION
         when 'NNNY' then 'Full category pilot'
       end as STATUS
   
-  from TaMember_Changes
+  from TaMembers_Changes
   where regexp_count(STATUSSTUDENT || STATUSPILOT || STATUSASCAT || STATUSFULLCAT, 'Y')=1; 
   
+
+
+
+
 -- Select the people that have more than one status : errors
-insert into TaMember_Error ( idError, Operation, MemberNo, dateError, step, dataError, typeError, status)
+
+
+
+
+insert into TaMembers_Error ( idError, Operation, MemberNo, dateError, step, dataError, typeError, status)
 
 select 
        seq_TRANSFORM_ERROR_ID.nextval as idError 
@@ -46,11 +59,17 @@ select
           when  regexp_count(STATUSSTUDENT || STATUSPILOT || STATUSASCAT || STATUSFULLCAT, 'Y')=0 then 'No status'
        end as typeError
     , 'Not fixed' as status
-  from TaMember_Changes
+  from TaMembers_Changes
   where regexp_count(STATUSSTUDENT || STATUSPILOT || STATUSASCAT || STATUSFULLCAT, 'Y')>1 OR regexp_count(STATUSSTUDENT || STATUSPILOT || STATUSASCAT || STATUSFULLCAT, 'Y')=0; 
   
-  -- Set the age to people
-insert into TaMember_Validate_TEST_age (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, AGE, DATEJOINED, DATELEFT, OWNSPLANEREG,  
+
+
+
+-- Set the age to people
+
+
+
+insert into TaMembers_Validate_TEST_age (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, AGE, DATEJOINED, DATELEFT, OWNSPLANEREG,  
                             SEX, CLUB, STATUS)
 
 select OPERATION 
@@ -70,10 +89,16 @@ select OPERATION
     ,  STATUS
 
 
-  from TaMember_Validate_Status;
+  from TaMembers_Validate_Status;
   
+
+
+
 -- Select the lines that have a error in the age
-insert into TaMember_Error ( idError, Operation, MemberNo, dateError, step, dataError, typeError, status)
+
+
+
+insert into TaMembers_Error ( idError, Operation, MemberNo, dateError, step, dataError, typeError, status)
 
 select 
        seq_TRANSFORM_ERROR_ID.nextval as idError
@@ -88,11 +113,16 @@ select
       end as typeError
     , 'Not fixed' as status
     
-  from TaMember_Validate_TEST_age where AGE >130 OR AGE < 5;  
+  from TaMembers_Validate_TEST_age where AGE >130 OR AGE < 5;  
+
+
 
 
 -- Select the people that have no errors
-insert into TaMember_Validate_age (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, AGE, DATEJOINED, DATELEFT, OWNSPLANEREG,  
+
+
+
+insert into TaMembers_Validate_age (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, AGE, DATEJOINED, DATELEFT, OWNSPLANEREG,  
                             SEX, CLUB, STATUS)
 
 select OPERATION 
@@ -110,7 +140,7 @@ select OPERATION
     ,  CLUB
     ,  STATUS
 
-  from TaMember_Validate_TEST_age
+  from TaMembers_Validate_TEST_age
   where AGE < 130 AND AGE > 5;  
 
 

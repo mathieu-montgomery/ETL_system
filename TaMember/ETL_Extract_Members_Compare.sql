@@ -1,7 +1,16 @@
--- New Row added
-TRUNCATE TABLE TaMember_Changes;
+--This will compare the data from the table TaMembers_Yesterday and the current TaMembers to find new/updated/deleted/birthday rows.
+--The new/updated/deleted/birthday will go into the table TaMembers_Changes.
 
-Insert into TaMember_Changes (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, DATEJOINED, DATELEFT, OWNSPLANEREG, STATUSSTUDENT, 
+
+
+
+-- New Row added
+
+
+
+TRUNCATE TABLE TaMembers_Changes;
+
+Insert into TaMembers_Changes (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, DATEJOINED, DATELEFT, OWNSPLANEREG, STATUSSTUDENT, 
                               STATUSPILOT, STATUSASCAT, STATUSFULLCAT, SEX, CLUB )
   select 'INS' as OPERATION 
     ,  MEMBERNO
@@ -20,17 +29,23 @@ Insert into TaMember_Changes (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPC
     ,  SEX
     ,  CLUB
   
-  from taMember
+  from taMembers
   
   where memberNO in (
-    select memberNO from TaMember
+    select memberNO from TaMembers
     minus
-    select memberNO from TaMember_Yesterday
+    select memberNO from TaMembers_Yesterday
   );
   
+
+
+
 -- Deleted Row 
 
-Insert into TaMember_Changes (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, DATEJOINED, DATELEFT, OWNSPLANEREG, STATUSSTUDENT, 
+
+
+
+Insert into TaMembers_Changes (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, DATEJOINED, DATELEFT, OWNSPLANEREG, STATUSSTUDENT, 
                               STATUSPILOT, STATUSASCAT, STATUSFULLCAT, SEX, CLUB )
   select 'DEL' as OPERATION 
     ,  MEMBERNO
@@ -49,19 +64,23 @@ Insert into TaMember_Changes (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPC
     ,  SEX
     ,  CLUB
   
-  from taMember_Yesterday
+  from taMembers_Yesterday
   
   where memberNO in (
-      select memberNO from TaMember_Yesterday
+      select memberNO from TaMembers_Yesterday
         minus
-      select memberNO from TaMember
+      select memberNO from TaMembers
   );
   
   
   
+
 -- Changed Row 
 
-Insert into TaMember_Changes (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, DATEJOINED, DATELEFT, OWNSPLANEREG, STATUSSTUDENT, 
+
+
+
+Insert into TaMembers_Changes (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, DATEJOINED, DATELEFT, OWNSPLANEREG, STATUSSTUDENT, 
                               STATUSPILOT, STATUSASCAT, STATUSFULLCAT, SEX, CLUB )
   select 'CHGD' as OPERATION 
     ,  MEMBERNO
@@ -80,21 +99,25 @@ Insert into TaMember_Changes (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPC
     ,  SEX
     ,  CLUB
   
-  from (select * from TaMember 
+  from (select * from TaMembers 
         minus 
-        select * from TaMember_Yesterday) changes
+        select * from TaMembers_Yesterday) changes
             
   where not changes.memberno in (
-          select memberno from TaMember 
+          select memberno from TaMembers 
           minus
-          select memberno from TaMember_Yesterday)
+          select memberno from TaMembers_Yesterday)
 ;
   
   
-  
--- Birtdhay Row 
 
-Insert into TaMember_Changes (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, DATEJOINED, DATELEFT, OWNSPLANEREG, STATUSSTUDENT, 
+  
+-- Birthday Row 
+
+
+
+
+Insert into TaMembers_Changes (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPCODE, DATEBORN, DATEJOINED, DATELEFT, OWNSPLANEREG, STATUSSTUDENT, 
                               STATUSPILOT, STATUSASCAT, STATUSFULLCAT, SEX, CLUB )
   select 'BDY' as OPERATION 
     ,  MEMBERNO
@@ -113,11 +136,11 @@ Insert into TaMember_Changes (OPERATION, MEMBERNO, INITIALS, NAME, ADDRESS, ZIPC
     ,  SEX
     ,  CLUB
   
-  from taMember
+  from taMembers
   
   where (
     extract (day from DATEBORN) = extract(day from sysdate)
     and extract (month from DATEBORN) = extract (month from sysdate) 
   )
-  and not MEMBERNO in (select MEMBERNO from TaMember_Changes)
+  and not MEMBERNO in (select MEMBERNO from TaMembers_Changes)
 ;

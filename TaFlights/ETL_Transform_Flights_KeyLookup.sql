@@ -1,4 +1,9 @@
 -- Key lookup for the pilote 1
+truncate table TaFlights_key_pilots_1;
+truncate table TaFlights_key_pilots_2;
+truncate table TaFlights_key_clubs;
+truncate table TaFlights_key_time;
+truncate table TaFlights_key_Planes;
 
 INSERT INTO TaFlights_key_pilots_1 (LAUNCHTIME, FLIGHT_DURATION,PLANEREGISTRATION,PILOT1INIT,PILOT2INIT,LAUNCH_TYPE,CABLEBREAK,CROSSCOUNTRYKM,CLUB)
 
@@ -6,18 +11,18 @@ select
       i.launchtime
     , i.flight_duration
     , i.planeregistration
-    , coalesce(p.MEMBER_ID, -1) --Pilot 1 lookup
-    , -1 as pilot2init
-    , i.launh_type
+    , coalesce(p.member_change_ID, -1) --Pilot 1 lookup
+    , i.pilot2init
+    , i.launch_type
     , i.cablebreak
     , i.crosscountrykm
     , i.club
 
   from taflights_validate_launch_type i
-      left outer join D_Member p on 
+      left outer join D_Members p on 
         (
           p.INITIALS = i.pilot1init
-          and p.validTo = to_date('9999-12-31 00:00:00', 'YYYY-MM-DD, HH24..')
+          and p.valid_To = to_date('9999-12-31', 'YYYY-MM-DD')
         )
 ;
 -- Key lookup for the pilote 2
@@ -29,17 +34,17 @@ select
     , i.flight_duration
     , i.planeregistration
     , i.pilot1Init
-    , coalesce(p.MEMBER_ID, -1) --Pilot2 lookup
-    , i.launh_type
+    , coalesce(p.member_change_ID, -1) --Pilot2 lookup
+    , i.launch_type
     , i.cablebreak
     , i.crosscountrykm
     , i.club
 
-  from TaFlights_key_pilots1 i
-      left outer join D_Member p on 
+  from TaFlights_key_pilots_1 i
+      left outer join D_Members p on 
         (
-          p.INITIALS = i.pilot1init
-          and p.validTo = to_date('9999-12-31 00:00:00', 'YYYY-MM-DD, HH24..')
+          p.INITIALS = i.pilot2init
+          and p.valid_To = to_date('9999-12-31', 'YYYY-MM-DD')
         )
 ;
 
@@ -60,16 +65,16 @@ select
     , i.planeregistration
     , i.pilot1Init
     , i.pilot2Init
-    , i.launh_type
+    , i.launch_type
     , i.cablebreak
     , i.crosscountrykm
     , coalesce(p.CLUB_CHANGE_ID, -1)  --Clubs id lookup
 
   from TaFlights_key_pilots_2 i
-      left outer join D_Club p on 
+      left outer join D_Clubs p on 
         (
           p.NAMECLUB = i.CLUB
-          and p.validTo = to_date('9999-12-31 00:00:00', 'YYYY-MM-DD, HH24..')
+          and p.valid_To = to_date('9999-12-31', 'YYYY-MM-DD')
         )
 ;
 
@@ -87,7 +92,7 @@ select
     , i.planeregistration
     , i.pilot1Init
     , i.pilot2Init
-    , i.launh_type
+    , i.launch_type
     , i.cablebreak
     , i.crosscountrykm
     , i.club
@@ -110,7 +115,7 @@ select
 
 -- Key lookup for the planes registration
 
-INSERT INTO TaFlights_key_Plane (LAUNCHTIME, FLIGHT_DURATION,PLANEREGISTRATION,PILOT1INIT,PILOT2INIT,LAUNCH_TYPE,CABLEBREAK,CROSSCOUNTRYKM,CLUB)
+INSERT INTO TaFlights_key_Planes (LAUNCHTIME, FLIGHT_DURATION,PLANEREGISTRATION,PILOT1INIT,PILOT2INIT,LAUNCH_TYPE,CABLEBREAK,CROSSCOUNTRYKM,CLUB)
 
 select 
       i.launchtime
@@ -118,15 +123,15 @@ select
     , coalesce(p.PLANE_CHANGE_ID, -1) --Planes registration lookup
     , i.pilot1Init
     , i.pilot2Init
-    , i.launh_type
+    , i.launch_type
     , i.cablebreak
     , i.crosscountrykm
     , i.club
 
   from TaFlights_key_Time i
-      left outer join D_Plane p on 
+      left outer join D_Planes p on 
         (
-          p.NAMEPLANE = i.PLANEREGISTRATION 
-          and p.validTo = to_date('9999-12-31 00:00:00', 'YYYY-MM-DD, HH24..')
+          p.REGISTRATIONNUMBER_ID = i.PLANEREGISTRATION 
+          and p.valid_To = to_date('9999-12-31', 'YYYY-MM-DD')
         )
 ; 

@@ -44,9 +44,7 @@
 
               end if;
           end if;
-          
-          dbms_output.put_line(id_group);
-      
+                
       
        Insert into F_Flights (FLIGHT_ID, PLANE_ID, FLIGHT_GROUP_ID, CLUB_ID, TIME_ID, LAUNCH_TYPE_ID, INCIDENT, DISTANCE, FLIGHT_DURATION)
         values(
@@ -64,25 +62,3 @@
         
       end loop;
  end;
- 
- 
- 
- 
- 
- 
- 
-
-select count(FLIGHT_GROUP_ID) from BRIDGEPILOTFLIGHTS where member_id=2477 AND weight = 0.5 AND FLIGHT_GROUP_ID in (select FLIGHT_GROUP_ID from BRIDGEPILOTFLIGHTS where member_id=2488 and weight=0.5);
-
- select * from F_Flights;
-  select * from bridgepilotflights;
-  
-ALTER TABLE F_Flights
-DISABLE CONSTRAINT FK_BridgeFlight;
-  truncate table bridgepilotflights;
-ALTER TABLE F_Flights
-ENABLE CONSTRAINT FK_BridgeFlight;
-      
-    SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'bridgepilotflights';  
- 
- 
